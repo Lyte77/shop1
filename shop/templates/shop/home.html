@@ -1,12 +1,15 @@
 {% extends 'shop/base.html' %}
 
 {% block content %}
+    <div class="add">
+        <a href="{% url 'shop:add_product' %}">Add Product</a>
+    </div>
     {% for product in products %}
         <li>
             <h2> {{ product.name }}</h2>
             <p>{{ product.description }}</p>
             <p>{{ product.price }}</p>
-            <img src="{{ product.image.url }}" alt="{{ product.name}}">
+            <img src="{{ product.image.url }}" alt="{{ product.name}}" width="200px">
             <p><a href="{% url 'shop:product_delete' product.id%}">Remove</a></p>
             
         </li>

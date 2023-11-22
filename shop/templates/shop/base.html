@@ -8,12 +8,15 @@
 </head>
 <body>
     <div class="header">
-        <a href="" class="logo"> My Shop</a>
+        <a href="{% url 'shop:home' %}" class="logo"> My Shop</a>
     </div>
 
     <div class="subheader">
         <div class="cart">
             Your cart is empty
+        </div>
+        <div class="account">
+            <a href="{% url 'shop:login' %}">login</a>
         </div>
     </div>
     
