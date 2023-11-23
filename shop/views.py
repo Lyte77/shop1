@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import ListView,CreateView,DeleteView
+from django.views.generic import ListView,CreateView,DeleteView,UpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from .models import Product
-from .forms import AddProductForm
+from .forms import AddProductForm,EditProductForm
 from django.urls import reverse_lazy
 
 # Create your views here.
@@ -24,7 +24,17 @@ class ProductCreateView(CreateView):
 
 @method_decorator(login_required,name='dispatch')
 @method_decorator(staff_member_required,name='dispatch')
+class ProductEditView(UpdateView):
+    model = Product
+    form_class = EditProductForm
+    success_url = reverse_lazy('shop:home')
+    template_name = 'shop/add_products.html'
+    
+
+@method_decorator(login_required,name='dispatch')
+@method_decorator(staff_member_required,name='dispatch')
 class ProductDeleteView(DeleteView):
     model = Product
     template_name = 'shop/product_confirm_delete.html'
     success_url = reverse_lazy('shop:home')
+

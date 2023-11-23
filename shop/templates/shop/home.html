@@ -1,5 +1,6 @@
 {% extends 'shop/base.html' %}
 
+{% block title %} Welcome {% endblock %}
 {% block content %}
     <div class="add">
         <a href="{% url 'shop:add_product' %}">Add Product</a>
@@ -10,7 +11,10 @@
             <p>{{ product.description }}</p>
             <p>{{ product.price }}</p>
             <img src="{{ product.image.url }}" alt="{{ product.name}}" width="200px">
-            <p><a href="{% url 'shop:product_delete' product.id%}">Remove</a></p>
+            {% if request.user.is_authenticated %}
+                <p><a href="{% url 'shop:product_delete' product.id%}">Remove</a></p>
+                <p><a href="{% url 'shop:edit' product.id %}">Edit</a></p>
+            {% endif %}
             
         </li>
     {% endfor %}

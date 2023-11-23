@@ -17,3 +17,15 @@ class AddProductForm(forms.ModelForm):
         self.fields['category'].queryset = Category.objects.all()
 
 
+class EditProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['category','name','description','image','price']
+        widgets = {
+            'image':forms.FileInput(attrs={
+                'accept': 'image/*'
+            })
+        }
+
+    
+
