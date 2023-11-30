@@ -2,13 +2,36 @@
 
 {% block title %} Welcome {% endblock %}
 {% block content %}
-    <div class="add">
-        <a href="{% url 'shop:add_product' %}">Add Product</a>
-    </div>
-    {% for product in products %}
-        <li>
-            <h2> {{ product.name }}</h2>
-            <p>{{ product.description }}</p>
+    
+    <form action="{% url 'shop:search' %}" method="get">
+        <input type="text" name="q" id="" placeholder="Search ">
+        <button type="submit">Search</button>
+    </form>
+
+    <h1>Search Results for '{{ query }}'</h1>
+    <ul>
+        {% if results %}
+            {% for product in results %}
+                <li>{{ product.name }}</li>
+                <p>{{ product.description }}</p>
+                <p> Price: {{ product.price }}</p>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200px">
+            
+           
+            {% endfor %}
+        {% else %}
+                    <p>No product found</p>
+        {% endif %}
+
+        
+          
+        
+            </ul>
+            
+            {% for product in products %}
+            <li>
+                <h2> {{ product.name }}</h2>
+                <p>{{ product.description }}</p>
             <p>{{ product.price }}</p>
             <img src="{{ product.image.url }}" alt="{{ product.name}}" width="200px">
             {% if request.user.is_authenticated %}
