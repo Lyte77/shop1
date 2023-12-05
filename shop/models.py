@@ -2,8 +2,11 @@ from django.db import models
 
 # Create your models here.
 
+
+
 class Category(models.Model):
     name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='item_images', null=True)
    
     slug = models.SlugField(max_length=200,unique=True)
 
@@ -24,8 +27,9 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     image = models.ImageField(upload_to='item_images')
-    description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10,decimal_places=2)
+    
+    new_price = models.DecimalField(max_digits=10,decimal_places=2,null=False,default=0.00)
+    old_price = models.DecimalField(max_digits=20,decimal_places=2,null=False)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

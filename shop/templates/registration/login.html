@@ -3,9 +3,16 @@
 {% block title %} Login {% endblock title %}
 
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Log in">
-    </form>
+
+<div class="container pt-5">
+
+    <div class="form-control">
+      
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Log in" class="btn btn-primary">
+        </form>
+    </div>
+</div>
 {% endblock %}
